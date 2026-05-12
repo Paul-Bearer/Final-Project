@@ -1,0 +1,492 @@
+
+.page_container {
+
+    padding: 10px;
+}
+
+
+
+
+
+.edit_case-top_info {
+    display: flex;
+    justify-content: center;
+}
+
+.top_header {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border: 1px solid black;                 
+    background-color: rgb(41, 115, 169);     
+}
+
+.top_header h1,
+.top_header span {
+    color: white;                           
+}
+
+.top_header_right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.side_bar_left{
+    border-right: 1px solid black;
+    width: 25%;
+}
+
+.right_side{
+    margin-left: 15px;
+    width: 75%;
+}
+
+
+
+.edit_case-bottom_info{
+    display: flex;
+    flex-direction: row;
+}
+
+.edit_case_name_id{
+    display: flex;
+    flex-direction: row;
+}
+
+.edit_case_name_id p {
+
+    padding-top: 13px;
+    padding-left: 15px;
+}
+
+.dob_dod {
+    display: flex;
+    flex-direction: row;
+}
+
+.location_staff {
+    display: flex;
+    flex-direction: row;
+    word-spacing: 10px;
+    gap: 1rem;
+}
+
+
+/* reuse this for personal info, obit, event and finance */
+.edit_page_heading{
+    padding: 10px;
+    padding-left: 20px;
+    
+    /* how do i make this border closer to the font? */
+}
+
+.edit_case-top_info {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.edit_case_image_left {
+
+    width: 15%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit_case_image_left img {
+    width: 100%;
+}
+
+.edit_case_info_right {
+    width: 85%;
+    padding-left: 15px ;
+    
+}
+
+/* ---------  INDEX----------- */
+
+.index_case_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 12px
+}
+
+.index_case_header a {
+    margin-left: 40px;
+    margin-top: 13px;
+}
+
+
+
+.index_single_case {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+
+}
+
+.index_case_left {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.index_case_left,
+.index_case_right {
+    min-width: 0;
+}
+
+.index_left_info p {
+    overflow-wrap: break-word;
+}
+
+
+
+.index_left_picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: auto;
+}
+
+.index_left_picture img {
+    width: 100%;
+    max-width: 120px;
+}
+
+.index_left_info {
+    width: 60%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.index_left_info p:first-of-type {
+    font-size: 24px;
+    color: rgb(28, 136, 156);
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+
+.index_edit_button {
+    margin-bottom: 10px;
+
+}
+
+.index_case_right {
+    width: 70%;
+    
+}
+
+
+.single_event_top {
+    color: rgb(28, 136, 156);
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.event_heading p{
+    color: rgb(147, 147, 147);
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0;
+}
+
+.event_location {
+    color: rgb(96, 96, 96);
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:14px;
+    font-weight: 700;
+    line-height: 18px;
+
+}
+
+.event_date {
+    color: rgb(96, 96, 96);
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:14px;
+} 
+
+.event_time {
+    color: rgb(96, 96, 96);
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:14px;
+}
+
+.single_event_top p {
+    margin: 0;
+}
+
+.single_event_bottom {
+    
+    border: 1px solid red;
+}
+
+.event_date {
+    border: 1px solid blue;
+}
+
+
+
+
+@media (max-width: 950px) {
+
+    .index_single_case {
+        flex-direction: column;
+    }
+
+    .index_case_left,
+    .index_case_right {
+        width: 100%;
+    }
+
+    .index_case_left {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .index_left_picture {
+        width: 100%;
+    }
+
+    .index_left_info {
+        width: 100%;
+        align-items: center;
+    }
+
+}
+
+
+
+/* --------- END INDEX----------- */
+.h5 {
+    color: (33, 37, 41)
+}
+
+/* ---------START Edit Case Top Info ---------  */
+
+.status, .dob_dod, .location_staff {
+    color: #454545;
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.edit_case_name_id p {
+    color: #454545;
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.edit_case_name_id h1 {
+    color: #212121;
+}
+
+
+ /* --------- END Edit Case Top Info ---------  */
+
+/* --------- START Edit Case Personal Info ---------  */
+
+
+
+
+/* --------- END Edit Case Personal Info ---------  */
+
+/* --------- START Obituary----------- */
+
+.obit_div {
+    padding-bottom: 10px;
+}
+
+/* --------- END Obituary----------- */
+
+
+
+/* --------- EVENTS----------- */
+
+
+
+
+.title_and_button {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.event_title {
+    
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+}
+
+.event_buttons {
+    
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+    padding-top: 6px;
+}
+
+.single_event_location{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* --------- END EVENTS----------- */
+
+
+
+/* --------- Start Finance ----------- */
+
+.product_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.product_left{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+.product_left, p {
+    margin-bottom: 1px;
+}
+
+.product_middle {
+    width: 20%;
+    font-weight: 700;
+    font-size: 16px;
+    color: #939393;
+    font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;  
+    margin-right: 20px;
+    
+}
+
+.product_right {
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+/* edit product */
+.edit_product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.edit_notes_div {
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.edit_quantity {
+    
+}
+
+.edit_price_div {
+    
+    width: 100%;
+}
+
+.edit_button {
+    
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.cancel_button {
+    
+}
+
+
+/* --------- END Finance----------- */
+/* --------- START Mobile - edit_case.html----------- */
+@media (max-width: 768px) {
+
+    .edit_case-bottom_info {
+        flex-direction: column;
+    }
+
+    .side_bar_left {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid black;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .right_side {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .edit_case-top_info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .edit_case_image_left {
+        width: 100%;
+        max-width: 120px;
+        margin-bottom: 10px;
+    }
+
+    .edit_case_info_right {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .edit_case_name_id,
+    .dob_dod,
+    .location_staff {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+.personal-field {
+    width: 50%;
+}
+
+@media (max-width: 768px) {
+    .personal-field {
+        width: 100%;
+    }
+}
+/* --------- END Mobile - edit_case.html----------- */
+
+
+
+
+
+
+

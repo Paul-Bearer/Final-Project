@@ -1,0 +1,61 @@
+{% extends "myapp/layout.html" %}
+
+{% block body %}
+    
+<h1>Edit Event</h1>
+
+<form method="POST" action="{% url 'edit_event' event_id=single_event.id %}">
+    {% csrf_token %}
+
+    <!-- check out list and id -->
+    <div class="input-group mb-3">
+        <label for="exampleDataList" class="input-group-text">Event Name</label>
+        <input class="form-control" value="{{single_event.event_title}}"  list="datalistOptions_name" id="new_event_name" name="new_event_name" placeholder="Type to search...">
+        <datalist id="datalistOptions_name">
+            <option value="Visitation">
+            <option value="Funeral Service">
+            <option value="Mass">
+            <option value="Graveside Service">
+            <option value="Burial">
+            <option value="Entombment">
+            <option value="Cremation">
+            
+        </datalist>
+    </div>
+
+    <div class="input-group mb-3">
+        <label for="exampleDataList" class="input-group-text">Event Location</label>
+        <input class="form-control" value="{{single_event.event_location}}" list="datalistOptions_location" name="new_event_location" id="new_event_location" placeholder="Type to search...">
+        <datalist id="datalistOptions_location">
+            <option value="O'Brien Funeral Home - Brick">
+            <option value="O'Brien Funeral Home - Wall">
+            <option value="St. Dominic Church">
+            <option value="St. Rose Church">
+            <option value="Gate of Heaven Cemetery">
+            <option value="Greenwood Cemetery">
+        </datalist>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Date</span>
+        <input type="date" id="new_event_date" value="{{single_event.date|date:'Y-m-d'}}" name="new_event_date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Time</span>
+        <input type="time" name="new_event_time" value="{{single_event.time|time:'H:i:s'}}" id="new_event_time" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <!-- output format = 22:21:00 -->
+    <!-- Make this a dropdown to improve user experience, be carefult where text the user will see and where it will be sent to database, hour and half = 1.5 -->
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Duration</span>
+        <input type="number" name="new_event_duration" value="{{single_event.duration}}" id="new_event_duration" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <div>
+        <button id="add_event_save" type="submit" class="btn btn-warning">Save</button>
+    </div>
+
+</form>
+{% endblock %}

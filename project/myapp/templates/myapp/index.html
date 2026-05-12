@@ -1,0 +1,84 @@
+{% extends "myapp/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="index_case_header">
+    <h1>Cases</h1>
+    <a href="{% url 'add_case' %}">Add Case</a>
+</div>
+
+<hr>
+
+
+
+{% for case in organized_cases %}
+    <div class="index_single_case">
+
+        <div class="index_case_left">
+
+            <div class="index_left_picture">
+                {% if case.person.male == True %}
+                    <img src="{% static 'myapp/images/male_photo.png' %}" alt="Male">
+                {% elif case.person.male == False %}
+                    <img src="{% static 'myapp/images/female_photo.png' %}" alt="Male">
+                {% else %}
+                    <img src="{% static 'myapp/images/none_photo.png' %}" alt="Male">
+                {% endif %}
+            </div>
+            
+            <div class="index_left_info">
+                <p>{{case.person.name}}</p>
+                <p>Case ID: {{case.person.case_id}}</p>
+                <p>{{case.person.date_of_birth}} - {{case.person.date_of_death}}</p>
+                    <div class="btn btn-warning index_edit_button">
+                        <a class="btn btn-warning" href="{% url 'edit_case' deceased_id=case.person.id %}" role="button">Edit</a>
+                    </div>
+            </div>
+
+        </div>
+
+        <div class="index_case_right">
+
+            <div>
+                Completed Status = {{case.person.completed}}
+            </div>
+
+            <div class="event_heading">
+                <p>Events</p>
+            </div>
+    
+            {% for event in case.events %}
+            <div class="text-primary event_title">
+                <h3>{{event.event_title}}</h3>
+            </div>    
+
+            <div class="single_event_location">
+                {{event.event_location}}
+            </div>   
+            <div class="single_event_date">
+                {{event.date}}
+            </div>
+
+            <div class="single_event_time">
+                {{event.time|time:"g:i A"}} to {{event.end_time|time:"g:i A"}}
+            </div>
+
+            <div class="single_event_duration">
+                {{event.duration}} Hours 
+            </div>
+            
+           {% endfor %}
+
+            
+        </div>
+
+    </div>
+    <hr>
+{% endfor %}
+    
+
+    <!-- hyperlink this -->
+    <a href="{% url 'add_case' %}">Add New Case</a>
+    
+{% endblock %}

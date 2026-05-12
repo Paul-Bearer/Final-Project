@@ -1,0 +1,398 @@
+{% extends "myapp/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+
+
+    <div class="edit_case-top_info">
+
+        <div class="edit_case_image_left">
+            {% if single_case_info.male == True %}
+                <img src="{% static 'myapp/images/male_photo.png' %}" alt="Male">
+            {% elif single_case_info.male == False %}
+                <img src="{% static 'myapp/images/female_photo.png' %}" alt="Female">
+            {% else %}
+                <img src="{% static 'myapp/images/none_photo.png' %}" alt="None">
+            {% endif %}
+        </div>
+
+
+        <div class="edit_case_info_right">
+            <div class="status">
+                    Status: {% if single_case_info.completed == True %}
+                                Completed
+                            {% else %}
+                                In Progress
+                            {% endif %}
+            </div>
+            <div class="edit_case_name_id">
+                <h1>{{single_case_info.name}}</h1>
+                <p>(Case ID: {{single_case_info.case_id.case_id}})</p>
+            </div>
+
+            <div class="dob_dod">
+                <p>
+                    {{ single_case_info.date_of_birth }} -
+                    {{ single_case_info.date_of_death }}
+                </p>
+            </div>
+
+            <div class="location_staff">
+                <p>
+                    Location: {{single_case_info.case_id.location}} <strong>|</strong>
+                    Staff Member: {{single_case_info.staff_member}}
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+<!-- put each in a div -->
+    <div class="edit_case-bottom_info">
+        <div class="side_bar_left">
+            <h3 id="deceased_info_tab" onclick="deceasedInfoClick()">Deceased Info</h3>
+            <h3 id="obituary_tab" onclick="obituaryClick()">Obituary</h3>
+            <h3 id="events_tab" onclick="eventsClick()">Events</h3>
+            <h3 id="finances_tab" onclick="financesClick()">Finances</h3>
+            <h3 id="complete_tab" onclick="completeClick()">Status</h3>
+
+        </div>
+
+        <div class="right_side">
+            <div class="personal_info_toggle">   
+
+                <div class="edit_page_heading">
+                    <h2>Personal Information</h2>
+                </div>
+
+                <div class="personal_info_fields">
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text">Name</span>
+                        <input id="personalInfoName" type="text" value="{{single_case_info.name}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text">Address</span>
+                        <input id="personalInfoAddress" type="text" value="{{single_case_info.address}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text" >Age</span>
+                        <input id="personalInfoAge" type="number" value="{{single_case_info.age}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text">Date of Birth</span>
+                        <input id="personalInfoDOB" type="date" value="{{single_case_info.date_of_birth|date:'Y-m-d'}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        
+                    </div>
+
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text">Date of Death</span>
+                        <input id="personalInfoDOD" type="date" value="{{single_case_info.date_of_death|date:'Y-m-d'}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        
+                    </div>
+
+
+                    <div class="input-group mb-3 personal-field">
+                    <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+                        <select class="form-select" id="personalInfoGender">
+                            <option value="" disabled selected>Select</option>
+                                <option value="male"
+                                {% if single_case_info.male == True %}selected{% endif %}>
+                                Male
+                                </option>
+
+                                <option value="female"
+                                {% if single_case_info.male == False %}selected{% endif %}>
+                                Female
+                                </option>
+                        </select>
+                    </div>
+
+
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text">Social Security Number</span>
+                        <input id="personalInfoSSN" type="text" value="{{single_case_info.ssn}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group mb-3 personal-field">
+                        <span class="input-group-text">Next of Kin</span>
+                        <input id="personalInfoNok" type="text" value="{{single_case_info.nok}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div>
+                        <button id="personal_info_save" type="button" class="btn btn-warning" onclick="savePersonalInfo({{single_case_info.id}})">Save</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="obituary_toggle">
+                <h2>Obituary</h2>
+                <br>
+                <div class="form-floating obit_div">
+                    <textarea class="form-control" placeholder="Enter Obituary Text Here" id="obituary" style="height: 100px">{{single_case_info.obituary}}</textarea>
+                </div>
+
+                <div>
+                    <button id="obituary_save" type="button" class="btn btn-warning" onclick="saveObituary({{single_case_info.id}})">Save</button>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="events_toggle">
+                <h2>Events</h2>
+
+                {% for i in single_event_info %}
+                <div class="event_info_div">
+                    
+
+
+                    <div class="title_and_button">
+                        <div class="text-primary event_title">
+                            <h3 >{{i.event_title}}</h3>
+                        </div>
+
+                        <div class="event_buttons">
+                            <div class="edit_event_button">
+                                <a href="{% url 'edit_event' event_id=i.id %}">✏️</a>
+                            </div>
+                            <div class="delete_event_button">
+                                <a href="{% url 'delete_event' event_id=i.id %}">❌</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="single_event_location">
+                        {{i.event_location}}
+                    </div>
+
+                    <div class="single_event_date">
+                        {{i.date}}
+                    </div>
+
+                    <div class="single_event_time">
+                        {{i.time|time:"g:i A"}} to {{i.end_time|time:"g:i A"}}
+                    </div>
+
+                    <div class="single_event_duration">
+                        {% if i.duration == 1 %}
+                        {{i.duration}} Hour 
+                        {% else %}
+                        {{i.duration}} Hours
+                        {% endif %} 
+                    </div>
+                </div>
+
+                <hr>
+                {% endfor %}
+                
+                    <a href="{% url 'add_event' deceased_id=single_case_info.id %}" id="add_event" type="button" class="btn btn-warning">Add Event</a>
+                </div>
+
+
+
+            
+            <div class="finances_toggle">
+                <h2>Finances</h2>
+                    <div class="input-group mb-3">
+
+                    
+
+                        <label for="exampleDataList" class="input-group-text">Search Products/Packages</label>
+                        <input class="form-control" list="datalistOptions_products" id="new_product" name="new_product" placeholder="Type to search...">
+
+                        <datalist id="datalistOptions_products">
+                            <option value="Basic Service Fee">
+                            <option value="Embalming">
+                            <option value="Embalming - Autopsy">
+                            <option value="Private Goodbye">
+                            <option value="Dressing, Casketing, and Cosmetizing">
+                            <option value="Hair Dresser">
+                            <option value="Visitation - Small">
+                            <option value="Visitation - Medium">
+                            <option value="Visitation - Large">
+                            <option value="Funeral Ceremony">
+                            <option value="Memorial Service">
+                            <option value="Graveside service">
+                            <option value="Refrigeration">
+                            <option value="Transfer to Funeral Home">
+                            <option value="Assistant on Transfer">
+                            <option value="Hearse">
+                            <option value="Limousine">
+                            <option value="Flower Car">
+                            <option value="Service Car">
+                            <option value="Casket">
+                            <option value="Vault or Outer Burial Container">
+                            <option value="Urn">
+                            <option value="Prayer Cards per 100 Cards">
+                            <option value="Register Book">
+                            <option value="Acknowledgement cards (per box)">
+                            <option value="Crucifix or Cross">
+                            <option value="Flowers">
+                            <option value="Cemetery">
+                            <option value="Crematory">
+                            <option value="Church">
+                            <option value="Clergy">
+                            <option value="Organist/Soloist">
+                            <option value="Certified Death Certificate">
+                            <option value="Additional Copies of Death Certificate">
+                            <option value="Permit and Recording Fee">
+                            <option value="Newspaper">
+                            <option value="Gratuities">
+                            <option value="Other">
+                            
+                        </datalist>
+                    </div>
+                    <div>
+
+                        <p style="display: none;" id="deceasedId">
+                            {{single_case_info.id}}
+                        </p>
+
+                        <h2>Product List</h2>
+
+                        <ul id="product_list">
+                            {% for product in finance_info %}
+
+                            <li class="list-group-item product_container" id="product_container_{{product.id}}">
+
+                                <div class="product_left">
+                                    <h6 class="product_name">{{product.name}}</h6>
+                                    <p class="product_category">{{product.category}}</p>
+                                    <p 
+                                        class="product_notes" 
+                                        id="product_notes_{{product.id}}" 
+                                        style="{% if product.notes != None %} display:block {% else %} display:none {% endif %}"
+                                    >{{product.notes}}</p>
+                                </div>
+
+                                <div class="product_middle">
+
+                                    <p class="product_quantity" id="product_quantity_{{product.id}}">{{product.quantity}}</p>
+
+                                   
+                                    <p class="product_price" id="product_price_{{product.id}}">${{product.price|floatformat:2}}</p>    
+                                </div>
+
+                                <div class="product_right">
+                                    <p class="product_edit" id="product_edit_{{product.id}}" 
+                                    onclick='editProduct({
+                                        id: {{product.id}},
+                                        name: "{{product.name}}", 
+                                        category: "{{product.category}}",
+                                        description: "{{product.description}}",
+                                    })'>
+                                    ✏️
+                                </p>
+                                    <a class="product_delete" href="{% url 'delete_product' product_id=product.id %}">❌</a>
+                                </div>
+
+                            </li>
+                                <div class="edit_product" id="edit_product_{{product.id}}">
+                                    <div class="edit_notes" id="edit_notes_{{product.id}}"></div>
+                                    <div class="edit_quantity" id="edit_quantity_{{product.id}}"></div>
+                                    <div class="edit_price" id="edit_price_{{product.id}}"></div>
+                                    <div class="edit_button" id="edit_button_{{product.id}}"></div>
+                                    <div class="cancel_button" id="cancel_button_{{product.id}}"></div>
+                                </div>    
+                            {% endfor %}
+                        </ul>
+
+                        <template id="product_template">
+                            <li class="list-group-item product_container">
+
+                                <div class="product_left">
+                                    <h6 class="product_name"></h6>
+                                    <p class="product_category"></p>
+                                    <p class="product_notes"></p>
+                                </div>
+
+                                <div class="product_middle">
+                                    <p class="product_quantity"></p>
+                                    <p class="product_price"></p>
+                                    <!-- unit cost -->
+                                </div>
+
+                                <div class="product_right">
+                                    <p class="product_edit">✏️</p>
+                                    <a class="product_delete">❌</a>
+                                </div>
+                            </li>    
+
+                                <div class="edit_product">
+                                    <div class="edit_notes"></div>
+                                    <div class="edit_quantity"></div>
+                                    <div class="edit_price"></div>
+                                    <div class="edit_button"></div>
+                                    <div class="cancel_button"></div>
+                                </div> 
+                        </template>
+                        
+                    </div>
+                    <h6 id="total_cost" class="total_cost">Total: {{total_cost}}</h6>
+            </div>
+            
+
+
+            <div class="complete_toggle">
+                <h2>Current Status</h2>
+                <p>
+                    {% if single_case_info.completed %}
+                        <strong>This Case is Complete</strong>
+
+                    {% else %}
+                        <strong>This Case is In Progress</strong>
+                    {% endif %}
+                </p>
+
+                <form method="POST" >
+                    {% csrf_token %}
+                    <button 
+                        type="submit"
+                        class="btn {% if single_case_info.completed %}btn-success{% else %}btn-primary{% endif %}"
+                    >
+                    {% if single_case_info.completed %}
+                        Return to In Progress
+
+                    {% else %}
+                        Mark as Completed
+                    {% endif %}
+                    </button>
+                </form>
+                
+                
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'myapp/edit_case.js' %}"></script>
+{% endblock %}
+
+
+
+
+

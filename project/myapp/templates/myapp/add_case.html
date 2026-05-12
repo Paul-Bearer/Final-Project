@@ -1,0 +1,63 @@
+{% extends "myapp/layout.html" %}
+
+{% block body %}
+    
+<h1>Start New Case</h1>
+
+<!-- GRAB STYLING FROM EDIT_CASE.HTML -->
+<form method="POST" action="{% url 'add_case' %}">
+    {% csrf_token %}
+    <div class="start_new_case_form">
+        <!-- sizing example - default -->
+        <div class="input-group mb-3 mb-3 personal-field">
+            <span class="input-group-text" id="inputGroup-sizing-default">Case Full Name</span>
+            <input type="text" id="new_full_name" class="form-control" name="new_full_name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+        </div>
+
+        <div class="input-group mb-3 personal-field">
+            <span class="input-group-text">Date of Birth</span>
+            <input id="new_dob" type="date" name="new_dob" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            
+        </div>                      
+
+        <div class="input-group mb-3 personal-field">
+            <span class="input-group-text">Date of Death</span>
+            <input id="new_dod" type="date" name="new_dod" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            
+        </div>
+        
+        <div class="input-group mb-3 personal-field">
+            <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+            <select class="form-select" id="new_gender" name="new_gender" required>
+                <option value="" disabled selected>Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        
+            
+        <div class="input-group mb-3 personal-field">
+            <label class="input-group-text" for="inputGroupSelect01">Location</label>
+            <select class="form-select" id="new_fh_location" name="new_fh_location" required>
+                <option value="" disabled selected>Select</option>
+                <option value="Brick">Brick</option>
+                <option value="Wall">Wall</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3 personal-field">
+            <span class="input-group-text">Social Security Number</span>
+            <input id="new_ssn" type="text" name="new_ssn" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div>
+            
+        <div>
+            <input type="submit" class="btn btn-warning">
+        </div>
+
+    </div>
+</form>
+
+    
+{% endblock %}
