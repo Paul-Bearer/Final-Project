@@ -61,7 +61,7 @@
             </div>
 
             <div class="single_event_time">
-                {{event.time|time:"g:i A"}} to {{event.end_time|time:"g:i A"}}
+                {{event.time|time:"g:i A"}}{% if event.end_time %} to {{event.end_time|time:"g:i A"}}{% endif %}
             </div>
 
             <div class="single_event_duration">
