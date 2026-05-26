@@ -44,9 +44,11 @@ def get_eventlist(events):
         start_date = event.date
         start_dt = datetime.combine(start_date, start_time)
 
-        delta = timedelta(hours=duration)
-
-        end_time = start_dt + delta
+        if duration is not None:
+            delta = timedelta(hours=duration)
+            end_time = start_dt + delta
+        else:
+            end_time = None
 
         event_dict["event_title"] = event.event_title
         event_dict["event_location"] = event.event_location
