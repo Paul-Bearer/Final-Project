@@ -5,7 +5,9 @@
 
 <div class="index_case_header">
     <h1>Cases</h1>
-    <a href="{% url 'add_case' %}">Add Case</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'add_case' %}">Add Case</a>
+    {% endif %}
 </div>
 
 <hr>
@@ -31,9 +33,11 @@
                 <p>{{case.person.name}}</p>
                 <p>Case ID: {{case.person.case_id}}</p>
                 <p>{{case.person.date_of_birth}} - {{case.person.date_of_death}}</p>
+                {% if user.is_authenticated %}    
                     <div class="btn btn-warning index_edit_button">
                         <a class="btn btn-warning" href="{% url 'edit_case' deceased_id=case.person.id %}" role="button">Edit</a>
                     </div>
+                {% endif %}
             </div>
 
         </div>
@@ -76,9 +80,5 @@
     </div>
     <hr>
 {% endfor %}
-    
-
-    <!-- hyperlink this -->
-    <a href="{% url 'add_case' %}">Add New Case</a>
     
 {% endblock %}
